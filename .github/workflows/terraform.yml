@@ -1,0 +1,18 @@
+name: Deploy HTML to Azure Web App
+
+on:
+  push:
+    branches: [ "main" ]  # Cambia "main" por tu rama principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'entregable01-azure'  # Nombre exacto de tu App Service
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
