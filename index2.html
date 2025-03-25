@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión QHSEC - Consultoría en Seguridad, Salud y Medio Ambiente</title>
+    <meta name="description" content="Consultoría especializada en Calidad, Salud Ocupacional, Seguridad y Medio Ambiente. Soluciones integrales para empresas.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root {
+        /* Colores principales */
+        --primary-color: #454394;
+        --primary-dark: #38357a;
+        --secondary-color: #454394;
+        --secondary-light: #6bd5f0;
+        --accent-color: #6fb34b;
+        --accent-dark: #5a8f3c;
+    
+        /* Escala de grises */
+        --white: #ffffff;
+        --light-color: #f8f9fa;
+        --gray-light: #e9ecef;
+        --gray-color: #6c757d;
+        --dark-color: #212529;
+    
+        /* Efectos y transiciones */
+        --transition: all 0.3s ease;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    
+        /* Tipografía */
+        --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --font-heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* Estilos base */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        font-family: var(--font-main);
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+        font-family: var(--font-heading);
+        line-height: 1.2;
+        font-weight: 700;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+    
+    /* Header */
+    header {
+        background-color: var(--white);
+        box-shadow: var(--box-shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+    }
+    
+    header.scrolled {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        position: relative;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        margin-right: 15px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 0 10px;
+        transition: var(--transition);
+    }
+    
+    .logo img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    
+    /* Navegación principal */
+    nav ul {
+        display: flex;
+        gap: 20px;
+    }
+    
+    nav ul li a {
+        font-weight: 600;
+        color: var(--dark-color);
+        padding: 5px 0;
+        position: relative;
+        font-size: 1rem;
+    }
+    
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--secondary-color);
+        transition: var(--transition);
+    }
+    
+    nav ul li a:hover::after,
+    nav ul li a[aria-current="page"]::after {
+        width: 100%;
+    }
+    
+    nav ul li a:hover,
+    nav ul li a[aria-current="page"] {
+        color: var(--secondary-color);
+    }
+    
+    /* Menú móvil */
+    .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--dark-color);
+        transition: var(--transition);
+        background: none;
+        border: none;
+        padding: 5px;
+    }
+    
+    .mobile-menu:hover {
+        color: var(--secondary-color);
+    }
+    
+    .mobile-menu[aria-expanded="true"] {
+        color: var(--secondary-color);
+    }
+    
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        text-align: center;
+        padding: 180px 20px 100px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 60px;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://images.unsplash.com/photo-1581093450021-4a7360e9aabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+        opacity: 0.15;
+        z-index: 0;
+    }
+    
+    .hero .container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero h1 {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        margin-bottom: 20px;
+        font-weight: 700;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .hero p {
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        max-width: 700px;
+        margin: 0 auto 30px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Botones */
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-top: 20px;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(111, 179, 75, 0.3);
+        position: relative;
+        overflow: hidden;
+        font-size: 1rem;
+    }
+    
+    .cta-button:hover {
+        background-color: var(--accent-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(111, 179, 75, 0.4);
+    }
+    
+    .cta-button i {
+        margin-left: 8px;
+        transition: var(--transition);
+    }
+    
+    .cta-button:hover i {
+        transform: translateX(3px);
+    }
+    
+    /* Secciones */
+    section {
+        padding: 80px 0;
+        position: relative;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+        font-size: clamp(1.8rem, 3vw, 2.3rem);
+        color: var(--primary-color);
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    .section-title h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: var(--gray-color);
+        line-height: 1.7;
+    }
+    
+    /* About Section */
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+    }
+    
+    .about-text {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .about-text p {
+        margin-bottom: 20px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+    
+    .about-image {
+        flex: 1;
+        min-width: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+    }
+    
+    .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: var(--transition);
+    }
+    
+    .about-image:hover img {
+        transform: scale(1.03);
+    }
+    
+    /* Services Section */
+    .services {
+        background-color: var(--light-color);
+    }
+    
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .service-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+        padding: 30px 25px;
+        transition: var(--transition);
+        text-align: center;
+        border-bottom: 4px solid transparent;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--box-shadow-hover);
+        border-bottom-color: var(--accent-color);
+    }
+    
+    .service-icon {
+        font-size: 50px;
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+        transition: var(--transition);
+    }
+    
+    .service-card:hover .service-icon {
+        transform: scale(1.1);
+        color: var(--primary-color);
+    }
+    
+    .service-card h3 {
+        margin-bottom: 15px;
+        color: var(--primary-color);
+        font-size: 1.3rem;
+    }
+    
+    .service-card p {
+        color: var(--gray-color);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    /* Values Section */
+    .values {
+        background-color: var(--white);
+    }
+    
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+    }
+    
+    .value-card {
+        text-align: center;
+        padding: 25px 20px;
+        background-color: var(--light-color);
+        border-radius: 10px;
+        transition: var(--transition);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow);
+        background-color: var(--white);
+    }
+    
+    .value-icon {
+        font-size: 45px;
+        color: var(--accent-color);
+        margin-bottom: 15px;
+        transition: var(--transition);
+    }
+    
+    .value-card:hover .value-icon {
+        transform: rotate(10deg) scale(1.1);
+    }
+    
+    .value-card h3 {
+        margin-bottom: 15px;
+        color: var(--primary-color);
+        font-size: 1.2rem;
+    }
+    
+    .value-card p {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    /* Clients Section */
+    .client-section {
+        padding: 80px 0;
+        background-color: var(--light-color);
+    }
+    
+    .client-logos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 25px;
+        align-items: center;
+    }
+    
+    .client-logo-item {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: var(--transition);
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .client-logo-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    .client-logo-item img {
+        max-width: 100%;
+        max-height: 70px;
+        object-fit: contain;
+        filter: grayscale(100%) opacity(0.8);
+        transition: var(--transition);
+    }
+    
+    .client-logo-item:hover img {
+        filter: grayscale(0%) opacity(1);
+    }
+    
+    /* Contact Section */
+    .contact {
+        background-color: var(--white);
+    }
+    
+    .contact-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+    }
+    
+    .contact-info {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .contact-details {
+        margin-top: 20px;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        transition: var(--transition);
+        background-color: var(--light-color);
+    }
+    
+    .contact-item:hover {
+        background-color: rgba(107, 213, 240, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .contact-icon {
+        font-size: 22px;
+        color: var(--secondary-color);
+        margin-right: 15px;
+        min-width: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .contact-item h4 {
+        color: var(--primary-color);
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-item p {
+        margin-bottom: 3px;
+        color: var(--dark-color);
+        font-size: 0.95rem;
+    }
+    
+    .contact-extra {
+        font-size: 0.85rem;
+        color: var(--gray-color);
+    }
+    
+    .qr-content {
+        text-align: center;
+        background: var(--light-color);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+        margin-top: 30px;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .qr-description {
+        margin-bottom: 15px;
+        color: var(--dark-color);
+        font-size: 0.9rem;
+    }
+    
+    .qr-code img {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        border: 1px solid #eee;
+        padding: 5px;
+        background: white;
+    }
+    
+    .qr-note {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: var(--gray-color);
+    }
+    
+    /* Contact Form */
+    .contact-form-container {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .contact-form {
+        background-color: var(--light-color);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+        height: 100%;
+    }
+    
+    .form-title {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.4rem;
+        position: relative;
+        padding-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    .form-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+    }
+    
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 0.95rem;
+        transition: var(--transition);
+        background-color: var(--white);
+        font-family: var(--font-main);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: var(--secondary-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(107, 213, 240, 0.1);
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .form-group select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 1em;
+        padding-right: 35px;
+    }
+    
+    .form-footer {
+        margin-top: 25px;
+    }
+    
+    .form-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 25px;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    
+    .button-icon {
+        margin-left: 8px;
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+    
+    .form-notice {
+        font-size: 0.8rem;
+        color: var(--gray-color);
+        margin-top: 15px;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    /* Footer */
+    .qhsec-footer {
+        background-color: #410101;
+        color: white;
+        padding: 60px 0 30px;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+    }
+    
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .footer-brand {
+        margin-bottom: 40px;
+    }
+    
+    .footer-logo {
+        font-size: clamp(1.5rem, 3vw, 1.8rem);
+        margin-bottom: 15px;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .footer-description {
+        max-width: 700px;
+        margin: 0 auto;
+        color: #bdc3c7;
+        line-height: 1.7;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+    
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+    
+    .footer-link {
+        color: white;
+        text-decoration: none;
+        padding: 8px 0;
+        position: relative;
+        transition: var(--transition);
+        font-size: 0.95rem;
+    }
+    
+    .footer-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #e74c3c;
+        transition: var(--transition);
+    }
+    
+    .footer-link:hover {
+        color: #e74c3c;
+    }
+    
+    .footer-link:hover::after {
+        width: 100%;
+    }
+    
+    .social-section {
+        margin-bottom: 40px;
+    }
+    
+    .social-title {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        margin-bottom: 25px;
+        color: #ecf0f1;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: var(--transition);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        font-size: 1.2rem;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .facebook { background-color: #3b5998; }
+    .linkedin { background-color: #0077b5; }
+    .instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
+    .whatsapp { background-color: #25D366; }
+    
+    .copyright {
+        border-top: 1px solid #34495e;
+        padding-top: 20px;
+        color: #bdc3c7;
+        font-size: 0.85rem;
+    }
+    
+    /* Botón volver arriba */
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: var(--transition);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 999;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        border: none;
+    }
+    
+    .back-to-top.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .back-to-top:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px);
+    }
+    
+    /* Estilos base */
+    .main-header {
+        background: #ffffff;
+        padding: 1rem 0;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo-img {
+        display: block;
+        transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+        transform: scale(1.03);
+    }
+    
+    /* Navegación principal */
+    .primary-navigation {
+        display: flex;
+        align-items: center;
+    }
+    
+    .menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 1.5rem;
+    }
+    
+    .menu-link {
+        text-decoration: none;
+        color: #333333;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    .menu-link:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #2a7fba;
+        transition: width 0.3s ease;
+    }
+    
+    .menu-link:hover,
+    .menu-link.active {
+        color: #2a7fba;
+    }
+    
+    .menu-link:hover:after,
+    .menu-link.active:after {
+        width: 100%;
+    }
+    
+    .contact-link {
+        background: #2a7fba;
+        color: white !important;
+        padding: 0.5rem 1.2rem !important;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-link:hover {
+        background: #1e6ca6;
+    }
+    
+    .contact-link:after {
+        display: none;
+    }
+    
+    /* Menú móvil */
+    .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1001;
+    }
+    
+    .toggle-bar {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: #333;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .mobile-menu-toggle {
+            display: block;
+        }
+        
+        .primary-navigation {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            justify-content: center;
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .primary-navigation[aria-expanded="true"] {
+            right: 0;
+        }
+        
+        .menu {
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            align-items: flex-start;
+        }
+        
+        .menu-link {
+            font-size: 1.1rem;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+    }
+
+    /* Media Queries */
+    @media screen and (max-width: 992px) {
+        section {
+            padding: 70px 0;
+        }
+        
+        .about-content {
+            flex-direction: column;
+        }
+        
+        .about-text, .about-image {
+            width: 100%;
+        }
+        
+        .contact-content {
+            flex-direction: column;
+        }
+        
+        .contact-info, .contact-form-container {
+            width: 100%;
+        }
+        
+        .qr-content {
+            margin: 30px auto 0;
+        }
+    }
+    
+    @media screen and (max-width: 768px) {
+        header {
+            padding: 10px 0;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        /* Menú móvil */
+        nav ul {
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            flex-direction: column;
+            background-color: var(--white);
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 999;
+            gap: 0;
+        }
+        
+        nav ul.active {
+            left: 0;
+        }
+        
+        nav ul li {
+            margin: 0;
+            text-align: center;
+        }
+        
+        nav ul li a {
+            display: block;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .mobile-menu {
+            display: block;
+        }
+        
+        .hero {
+            padding: 150px 20px 80px;
+        }
+        
+        .services-grid, .values-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .client-logos-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .client-logo-item {
+            height: 100px;
+            padding: 15px;
+        }
+        
+        .back-to-top {
+            width: 45px;
+            height: 45px;
+            font-size: 1.1rem;
+        }
+    }
+    
+    @media screen and (max-width: 576px) {
+        .hero {
+            padding: 130px 15px 70px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            margin-bottom: 40px;
+        }
+        
+        .services-grid, .values-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .client-logos-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .footer-links {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            min-width: 100%;
+        }
+    }
+</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión QHSEC - Consultoría en Seguridad, Salud y Medio Ambiente</title>
+    <meta name="description" content="Consultoría especializada en Calidad, Salud Ocupacional, Seguridad y Medio Ambiente. Soluciones integrales para empresas.">
+    <meta name="keywords" content="consultoría QHSE, seguridad ocupacional, salud laboral, medio ambiente, gestión de calidad">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="img/Logo-Gestion-Qhsec-1-1.png" as="image">
+</head>
+<body>
+
+    <header id="header" class="main-header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="#inicio" class="logo" aria-label="Inicio - Gestión QHSEC">
+                    <img src="img/Logo-Gestion-Qhsec-1-1.png" 
+                         alt="Gestión QHSEC"
+                         width="200" height="68"
+                         class="logo-img">
+                </a>
+                
+                <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Menú principal">
+                    <span class="toggle-bar"></span>
+                    <span class="toggle-bar"></span>
+                    <span class="toggle-bar"></span>
+                </button>
+                
+                <nav id="primary-nav" class="primary-navigation" role="navigation" aria-label="Menú principal">
+                    <ul id="primary-menu" class="menu" role="menubar">
+                        <li role="none">
+                            <a href="#inicio" role="menuitem" aria-current="page" class="menu-link active">Inicio</a>
+                        </li>
+                        <li role="none">
+                            <a href="#nosotros" role="menuitem" class="menu-link">Nosotros</a>
+                        </li>
+                        <li role="none">
+                            <a href="#servicios" role="menuitem" class="menu-link">Servicios</a>
+                        </li>
+                        <li role="none">
+                            <a href="#vision" role="menuitem" class="menu-link">Visión</a>
+                        </li>
+                        <li role="none">
+                            <a href="#clientes" role="menuitem" class="menu-link">Clientes</a>
+                        </li>
+                        <li role="none">
+                            <a href="#contacto" role="menuitem" class="menu-link contact-link">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section mejorada -->
+    <section class="hero" id="inicio" role="region" aria-labelledby="hero-heading">
+        <div class="container">
+            <h1 id="hero-heading">Somos tu aliado estratégico en consultoría QHSE</h1>
+            <p>Más de 10 años de experiencia brindando soluciones integrales en Calidad, Medio Ambiente, Seguridad y Salud Ocupacional</p>
+            <a href="#contacto" class="cta-button" aria-label="Ir a contacto">
+                ¡Contáctanos ahora! <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section mejorada -->
+    <section class="about" id="nosotros" role="region" aria-labelledby="about-heading">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="about-heading">¿Quiénes somos?</h2>
+            </div>
+            <div class="about-content">
+                <article class="about-text">
+                    <p><strong>GESTION QHSEC S.A.C.</strong> es una empresa líder en consultoría, vigilancia médica, capacitación y soluciones integrales en las áreas de Calidad, Medio Ambiente, Seguridad y Salud Ocupacional. Con una trayectoria de más de una década, brindamos servicios especializados adaptados a diferentes industrias como producción, minería, construcción, textiles y servicios.</p>
+                    <p>Contamos con <strong>certificación de homologación MEGA</strong> y estamos respaldados por una filosofía de sostenibilidad, calidad y experiencia. Nuestro equipo multidisciplinario incluye ingenieros industriales, ambientales, mineros, metalúrgicos, abogados y especialistas en salud y alimentos, todos comprometidos con la excelencia en cada proyecto.</p>
+                    <p>Nuestro enfoque personalizado y nuestra metodología basada en las mejores prácticas internacionales nos permiten ofrecer soluciones efectivas y cumplir con los más altos estándares de calidad y seguridad.</p>
+                </article>
+                
+                <figure class="about-image">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Equipo de Gestión QHSEC trabajando" 
+                         loading="lazy"
+                         width="600" height="400">
+                </figure>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Vision Section mejorada -->
+    <section class="servicios" id="servicios" role="region" aria-labelledby="servicios-heading">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="servicios-heading">Nuestros Servicios</h2>
+                <p class="section-subtitle">Ofrecemos soluciones integrales para garantizar el cumplimiento normativo, el bienestar laboral y la mejora continua en las organizaciones.</p>
+            </div>
+            
+            <div class="services-grid" role="list">
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Consultoría y Auditoría</h3>
+                    <p>Evaluación del cumplimiento normativo en Seguridad, Salud Ocupacional, Calidad y Medio Ambiente. Implementación de mejoras para optimizar procesos y reducir riesgos.</p>
+                </article>
+                
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Vigilancia Médica Ocupacional</h3>
+                    <p>Programas completos de vigilancia médica adaptados a cada industria, garantizando la salud y seguridad de los trabajadores según los riesgos específicos.</p>
+                </article>
+                
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Capacitaciones Especializadas</h3>
+                    <p>Formación en normativas y buenas prácticas de seguridad laboral, desarrollada por profesionales con amplia experiencia en el sector industrial.</p>
+                </article>
+                
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Monitoreos Ocupacionales</h3>
+                    <p>Evaluación de ruido, vibraciones, agentes químicos y físicos. Identificación de factores de riesgo y recomendación de medidas preventivas efectivas.</p>
+                </article>
+                
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>Supervisión de Campo</h3>
+                    <p>Gestión integral de seguridad en proyectos industriales con personal especializado para garantizar el cumplimiento de todas las normativas aplicables.</p>
+                </article>
+                
+                <article class="service-card" role="listitem">
+                    <div class="service-icon" aria-hidden="true">
+                        <i class="fas fa-people-arrows"></i>
+                    </div>
+                    <h3>Evaluaciones Ergonómicas</h3>
+                    <p>Diseño de estrategias para mejorar las condiciones laborales, reducir lesiones y aumentar la productividad mediante adaptaciones ergonómicas.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section mejorada -->
+    <section class="vision" id="vision" role="region" aria-labelledby="vision-heading">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="vision-heading">Nuestra Visión</h2>
+                <p class="section-subtitle">Ser reconocidos como líderes en consultoría y soluciones integrales en Calidad, Seguridad, Salud Ocupacional y Medio Ambiente a nivel nacional e internacional.</p>
+            </div>
+            
+            <div class="about-content">
+                <figure class="about-image">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Visión de Gestión QHSEC" 
+                         loading="lazy"
+                         width="600" height="400">
+                </figure>
+                
+                <article class="about-text">
+                    <p>Buscamos impulsar un <strong>mundo empresarial donde la excelencia en QHSE</strong> sea la norma y no la excepción, promoviendo un impacto positivo en la seguridad, salud y bienestar de las empresas y comunidades donde operamos.</p>
+                    
+                    <h3 class="visually-hidden">Pilares fundamentales</h3>
+                    <ul class="vision-list">
+                        <li><strong>Innovación continua:</strong> Adaptación a los cambios normativos y tecnológicos</li>
+                        <li><strong>Sostenibilidad:</strong> Soluciones que equilibran productividad y responsabilidad ambiental</li>
+                        <li><strong>Excelencia:</strong> Estándares de calidad que superan las expectativas de nuestros clientes</li>
+                    </ul>
+                    
+                    <p>Creemos firmemente que la gestión integral de calidad, seguridad y medio ambiente es un factor clave para el éxito sostenible de cualquier organización.</p>
+                </article>
+            </div>
+            
+            <div class="section-title" style="margin-top: 80px;">
+                <h2>Nuestros Valores</h2>
+                <p class="section-subtitle">Principios fundamentales que guían nuestro trabajo y relación con clientes y colaboradores.</p>
+            </div>
+            
+            <div class="values-grid" role="list">
+                <article class="value-card" role="listitem">
+                    <div class="value-icon" aria-hidden="true">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compromiso con la seguridad</h3>
+                    <p>Priorizamos el bienestar de las personas y la gestión de riesgos laborales.</p>
+                </article>
+                
+                <article class="value-card" role="listitem">
+                    <div class="value-icon" aria-hidden="true">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Excelencia y calidad</h3>
+                    <p>Implementamos las mejores prácticas en cada proyecto que ejecutamos.</p>
+                </article>
+                
+                <article class="value-card" role="listitem">
+                    <div class="value-icon" aria-hidden="true">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovación constante</h3>
+                    <p>Desarrollamos soluciones adaptadas a los cambios del mercado y las necesidades de nuestros clientes.</p>
+                </article>
+                
+                <article class="value-card" role="listitem">
+                    <div class="value-icon" aria-hidden="true">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sostenibilidad</h3>
+                    <p>Promovemos prácticas responsables con el medio ambiente y la comunidad.</p>
+                </article>
+            </div>
+            <!-- Sección de Clientes - Versión Profesional -->
+<section class="client-section" style="padding: 80px 0; background-color: #f8f9fa;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      
+
+        
+        <!-- Vision Section mejorada -->
+    <section class="clientes" id="clientes" role="region" aria-labelledby="clientes-heading">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="clientes-heading">Empresas que confían en nosotros</h2>
+                <p class="section-subtitle">Colaboramos con organizaciones líderes en diversos sectores industriales</p>
+            </div>
+      
+      <!-- Grid de logos de clientes -->
+      <div class="client-logos-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; align-items: center;">
+        
+        <!-- Item de cliente - Ejemplo 1 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/britanico.png" 
+               alt="Logo Cliente 1" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 2 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/digital_logo-institucional-universidad-del-pacifico-azul.jpg" 
+               alt="Logo Cliente 2" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 3 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/ishop.png" 
+               alt="Logo Cliente 3" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 4 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/Logo_Tottus.png" 
+               alt="Logo Cliente 4" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 5 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/Marathon_blue_logo.png" 
+               alt="Logo Cliente 5" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 6 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/Alicorp.svg.png" 
+               alt="Logo Cliente 6" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 7 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/maccaferri_logo.jpg" 
+               alt="Logo Cliente 7" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+        <!-- Item de cliente - Ejemplo 8 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+          <img src="img-clientes/mavegsa.png" 
+               alt="Logo Cliente 8" 
+               loading="lazy" 
+               style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+
+        <!-- Item de cliente - Ejemplo 8 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+            <img src="img-clientes/paraiso-37028.jpg" 
+                 alt="Logo Cliente 9" 
+                 loading="lazy" 
+                 style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+
+        <!-- Item de cliente - Ejemplo 8 -->
+        <div class="client-logo-item" role="listitem" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; height: 120px;">
+            <img src="img-clientes/299232243_458448806289014_4430738037815699094_n.png" 
+                 alt="Logo Cliente " 
+                 loading="lazy" 
+                 style="max-width: 100%; max-height: 70px; object-fit: contain; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease;">
+        </div>
+        
+      </div>
+      
+      <!-- Efecto hover (debería ir en tu CSS) -->
+      <style>
+        .client-logo-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .client-logo-item:hover img {
+          filter: grayscale(0%) opacity(1);
+        }
+      </style>
+      
+        </div>
+        </div>
+    </section>
+    
+<!-- Footer mejorado con estructura clara -->
+<footer class="qhsec-footer">
+    <div class="footer-container">
+      <!-- Sección de marca -->
+      <div class="footer-brand">
+        <h3 class="footer-logo">GESTIÓN QHSEC S.A.C.</h3>
+        <p class="footer-description">
+          Tu aliado estratégico en consultoría y soluciones integrales para Calidad, Medio Ambiente, Seguridad y Salud Ocupacional.
+        </p>
+      </div>
+      
+      <!-- Navegación del footer -->
+      <nav class="footer-links">
+        <a href="#inicio" class="footer-link">Inicio</a>
+        <a href="#nosotros" class="footer-link">¿Quiénes somos?</a>
+        <a href="#servicios" class="footer-link">Servicios</a>
+        <a href="#vision" class="footer-link">Visión</a>
+        <a href="#clientes" class="footer-link">Clientes</a>
+      </nav>
+      
+      <!-- Redes sociales -->
+      <div class="social-section">
+        <p class="social-title">Mantente al día con nuestras novedades y servicios</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/GestionQHSEC/?locale=es_LA" class="social-icon facebook" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/gesti%C3%B3n-qhsec-s-a-c/?originalSubdomain=pe" class="social-icon linkedin" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.instagram.com/gestionqhsec/?hl=es-la" class="social-icon instagram" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.link/4tvmw1" class="social-icon whatsapp" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Copyright -->
+      <div class="copyright">
+        <p>&copy; <span id="current-year">2025</span> Gestión QHSEC S.A.C. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <style>
+  /* Estilos específicos para el footer */
+  .qhsec-footer {
+    background-color: #410101;
+    color: white;
+    padding: 60px 0 30px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-brand {
+    margin-bottom: 40px;
+  }
+  
+  .footer-logo {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .footer-description {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #bdc3c7;
+    line-height: 1.7;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .footer-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #e74c3c;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-link:hover {
+    color: #e74c3c;
+  }
+  
+  .footer-link:hover::after {
+    width: 100%;
+  }
+  
+  .social-section {
+    margin-bottom: 40px;
+  }
+  
+  .social-title {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #ecf0f1;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 1.4rem;
+  }
+  
+  .social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  .facebook { background-color: #3b5998; }
+  .linkedin { background-color: #0077b5; }
+  .instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
+  .whatsapp { background-color: #25D366; }
+  
+  .copyright {
+    border-top: 1px solid #34495e;
+    padding-top: 20px;
+    color: #bdc3c7;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-logo {
+      font-size: 1.5rem;
+    }
+    
+    .footer-description {
+      font-size: 0.95rem;
+    }
+    
+    .footer-links {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .social-icons {
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+    }
+  }
+  </style>
+    <script>
+        // Actualizar año automáticamente
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Función para el menú móvil
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const button = document.querySelector('.mobile-menu');
+            
+            menu.classList.toggle('active');
+            const isExpanded = menu.classList.contains('active');
+            button.setAttribute('aria-expanded', isExpanded);
+        }
+        
+        // Scroll suave para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+         // JavaScript para el menú móvil
+        document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.querySelector('.mobile-menu-toggle');
+        const primaryNav = document.querySelector('.primary-navigation');
+        
+        toggleButton.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            primaryNav.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (para móviles)
+        const menuLinks = document.querySelectorAll('.menu-link');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    toggleButton.setAttribute('aria-expanded', 'false');
+                    primaryNav.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
